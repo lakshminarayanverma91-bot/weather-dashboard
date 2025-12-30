@@ -10,7 +10,7 @@ import seaborn as sns  # makes graphs look better
 # Setting API and cities
 # ---------------------------
 
-API_KEY = "0911a69ee2f61c1522e56d912ebf4267"  # put your API key here
+API_KEY = "Enter your API Key"  # put your API key here
 CITIES = ["London", "New York", "Mumbai", "Tokyo", "Dubai", "Sydney", "Paris"]
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
