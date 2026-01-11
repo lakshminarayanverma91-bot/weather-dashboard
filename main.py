@@ -10,7 +10,15 @@ import seaborn as sns  # makes graphs look better
 # ---------------------------
 
 API_KEY = "Enter your API Key"  # put your API key here
-CITIES = ["London", "New York", "Mumbai", "Tokyo", "Dubai", "Sydney", "Paris"]
+
+CITIES = []
+num_of_cities = int(input("Enter number of Cities: "))
+count=1
+for city_name in range(num_of_cities):
+    city_name = input(f"Enter City {count}: ")
+    CITIES.append(city_name)
+    count+=1
+    
 BASE_URL = "https://api.openweathermap.org/data/2.5/weather"
 
 # ---------------------------
@@ -32,12 +40,11 @@ def get_weather():
         
         if r.status_code == 200:
             data = r.json()
+            
             temp = data['main']['temp']  # temperature
             hum = data['main']['humidity']  # humidity
             weather = data['weather'][0]['main']  # weather condition
             wind = data['wind']['speed']  # wind speed
-            
-            print(city, "data fetched!")
             
             # add data to list
             weather_data.append({
@@ -47,6 +54,9 @@ def get_weather():
                 "Weather": weather,
                 "Wind": wind
             })
+
+            print(city, "data fetched!")
+        
         else:
             print("Failed to get data for", city)
     
@@ -106,4 +116,5 @@ else:
     print("No data to show")
     
 print("Program ended.")
+
 
