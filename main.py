@@ -1,5 +1,4 @@
 # My first Python project - Weather Dashboard
-# Beginner style code
 
 import requests   # for getting data from internet
 import pandas as pd  # for making table of data
@@ -107,3 +106,4 @@ else:
     print("No data to show")
     
 print("Program ended.")
+
