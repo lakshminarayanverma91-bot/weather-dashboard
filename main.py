@@ -1,3 +1,8 @@
+# ------------------------------
+# WEATHER API DASHBOARD PROJECT
+# ------------------------------
+
+# Import necessary libraries
 import requests   # for getting data from internet
 import pandas as pd  # for making table of data
 import matplotlib.pyplot as plt  # for making graphs
@@ -47,7 +52,7 @@ def get_weather():
 
         try:
             r = requests.get(BASE_URL, params=params,timeout=10)
-            response.raise_for_status()  # handles 4xx / 5xx errors
+            r.raise_for_status()  # handles 4xx / 5xx errors
             data = r.json()
                 
             temp = data['main']['temp']  # temperature
@@ -99,7 +104,7 @@ def make_graphs(df):
         
         print("Making graphs...")
         
-        fig, axes = plt.subplots(2, 2, figsize=(15, 10))
+        fig, axes = plt.subplots(2, 2, figsize=(18, 12))
         fig.suptitle("Weather Dashboard", fontsize=20)
         
         # Temperature bar plot
@@ -109,6 +114,9 @@ def make_graphs(df):
         # Humidity vs Temperature scatter
         sns.scatterplot(ax=axes[0, 1], x="Temperature", y="Humidity", hue="City", size="Wind", data=df, s=100)
         axes[0, 1].set_title("Humidity vs Temperature")
+
+        # to move legend outside the plot
+        axes[0, 1].legend(bbox_to_anchor=(1.05, 1), loc="upper left")
         
         # Wind bar plot
         sns.barplot(ax=axes[1, 0], x="City", y="Wind", data=df, palette="viridis")
@@ -119,7 +127,7 @@ def make_graphs(df):
         axes[1, 1].pie(weather_counts, labels=weather_counts.index, autopct="%1.1f%%", colors=sns.color_palette("pastel"))
         axes[1, 1].set_title("Weather Condition")
         
-        plt.tight_layout(rect=[0, 0.03, 1, 0.95])
+        plt.tight_layout(pad=3)
         
         plt.savefig("images/weather_plot.png")  # to save image
         print("Dashboard saved!")
